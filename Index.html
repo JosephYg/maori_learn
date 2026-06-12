@@ -1,0 +1,1721 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Te Reo Māori Daily Practice</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17211f;
+      --muted: #5f6d68;
+      --line: #d8e1dc;
+      --paper: #fbfcf8;
+      --panel: #ffffff;
+      --green: #1f7a5a;
+      --green-dark: #11523d;
+      --gold: #c28a21;
+      --rose: #b94747;
+      --blue: #315f8f;
+      --shadow: 0 16px 38px rgba(29, 48, 41, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(31,122,90,0.08), transparent 34%),
+        linear-gradient(315deg, rgba(194,138,33,0.12), transparent 30%),
+        var(--paper);
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    .app {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 8px 0 36px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: end;
+      padding: 6px 0 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(18px, 2.5vw, 29px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .subhead {
+      margin: 5px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .datebox {
+      text-align: right;
+      color: var(--muted);
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    .datebox strong {
+      display: block;
+      color: var(--green-dark);
+      font-size: 20px;
+    }
+
+    .topbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 10px 0 14px;
+      align-items: center;
+    }
+
+    .tabs {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 4px;
+      background: var(--panel);
+    }
+
+    .tab {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 9px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      min-height: 40px;
+    }
+
+    .tab[aria-selected="true"] {
+      background: var(--green);
+      color: white;
+    }
+
+    .action {
+      border: 1px solid var(--green);
+      background: var(--green);
+      color: white;
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      min-height: 42px;
+      font-weight: 700;
+    }
+
+    .ghost {
+      border-color: var(--line);
+      background: var(--panel);
+      color: var(--green-dark);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    main.progress-minimized {
+      grid-template-columns: minmax(0, 1fr) 154px;
+    }
+
+    section, aside {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 22px;
+    }
+
+    aside {
+      padding: 18px;
+      position: sticky;
+      top: 18px;
+    }
+
+    .progress-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .progress-head h3 {
+      margin: 0;
+    }
+
+    .mini-button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--green-dark);
+      border-radius: 8px;
+      min-width: 42px;
+      min-height: 38px;
+      padding: 7px 9px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    aside.minimized {
+      padding: 12px;
+    }
+
+    aside.minimized .progress-body,
+    aside.minimized .note {
+      display: none;
+    }
+
+    h2, h3 {
+      margin: 0 0 14px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h2 { font-size: 28px; }
+    h3 { font-size: 19px; }
+
+    .hidden { display: none; }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .word-grid {
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+    }
+
+    .word {
+      min-height: 88px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 9px;
+      background: linear-gradient(180deg, #fff, #f8fbf7);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .maori {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.12;
+      color: var(--green-dark);
+      overflow-wrap: anywhere;
+    }
+
+    .meaning {
+      color: var(--ink);
+      font-weight: 650;
+      line-height: 1.18;
+      font-size: 14px;
+    }
+
+    .note {
+      color: var(--muted);
+      line-height: 1.25;
+      font-size: 13px;
+    }
+
+    .sentence-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .sentence {
+      border-left: 5px solid var(--gold);
+      background: #fffaf0;
+      padding: 8px 10px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .sentence .maori {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+
+    .practice-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      display: grid;
+      gap: 6px;
+      background: #fff;
+    }
+
+    .prompt {
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 52px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: var(--ink);
+      background: #fbfcfb;
+    }
+
+    .practice-answer {
+      min-height: 38px;
+      height: 38px;
+    }
+
+    #selfPracticeInput {
+      min-height: 230px;
+    }
+
+    textarea:focus {
+      outline: 3px solid rgba(31, 122, 90, 0.16);
+      border-color: var(--green);
+    }
+
+    .feedback {
+      border-radius: 8px;
+      padding: 6px 8px;
+      line-height: 1.25;
+      font-size: 13px;
+      background: #f3f7f5;
+      color: var(--muted);
+    }
+
+    .feedback.good {
+      color: var(--green-dark);
+      background: #eaf6ef;
+    }
+
+    .feedback.fix {
+      color: #71351f;
+      background: #fff2e7;
+    }
+
+    .history-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .history-day {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .history-day strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green-dark);
+    }
+
+    .mini-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      background: #f8fbf7;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .stat {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat:last-child { border-bottom: 0; }
+
+    .stat span { color: var(--muted); }
+    .stat strong { color: var(--green-dark); }
+
+    .progress {
+      height: 10px;
+      background: #edf2ef;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 8px 0 18px;
+    }
+
+    .progress div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green), var(--gold));
+      transition: width .2s ease;
+    }
+
+    .empty {
+      border: 1px dashed var(--line);
+      padding: 18px;
+      border-radius: 8px;
+      color: var(--muted);
+      background: #fbfcfb;
+    }
+
+    .small-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .self-controls {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .self-result {
+      margin-top: 14px;
+    }
+
+    .self-entry {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+      display: grid;
+      gap: 6px;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .media-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fff;
+      display: grid;
+      gap: 8px;
+    }
+
+    .media-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+
+    .media-item video {
+      width: 100%;
+      max-height: 360px;
+      border-radius: 6px;
+      background: #000;
+    }
+
+    .media-item audio {
+      width: 100%;
+    }
+
+    .media-empty {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .danger {
+      border-color: #e1b8b8;
+      color: var(--rose);
+    }
+
+    @media (max-width: 920px) {
+      header, main {
+        grid-template-columns: 1fr;
+      }
+
+      main.progress-minimized {
+        grid-template-columns: 1fr;
+      }
+
+      .datebox {
+        text-align: left;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .word-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .app {
+        width: min(100% - 20px, 1180px);
+        padding-top: 6px;
+      }
+
+      section, aside {
+        padding: 16px;
+      }
+
+      .tabs {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tab {
+        padding-inline: 8px;
+      }
+
+      .word-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>Te Reo Maori Daily Practice</h1>
+        <p class="subhead">A daily study desk for five new kupu, two useful sentences, yesterday’s review, and five checked practice prompts from your saved learning history.</p>
+      </div>
+      <div class="datebox">
+        <span id="todayLabel"></span>
+        <strong id="dayNumber"></strong>
+      </div>
+    </header>
+
+    <div class="topbar">
+      <div class="tabs" role="tablist" aria-label="Practice sections">
+        <button class="tab" id="tabLearn" aria-selected="true">Learn</button>
+        <button class="tab" id="tabPractice" aria-selected="false">Practice</button>
+        <button class="tab" id="tabSelfPractice" aria-selected="false">Self-practice</button>
+        <button class="tab" id="tabHistory" aria-selected="false">History</button>
+      </div>
+      <button class="action" id="markLearned">Mark today learned</button>
+      <button class="action ghost" id="exportData">Export progress</button>
+      <button class="action ghost" id="importData">Import progress</button>
+      <input class="file-input" id="importFile" type="file" accept="application/json,.json">
+    </div>
+
+    <main>
+      <div>
+        <section id="learnPanel">
+          <h2>Today’s New Kupu</h2>
+          <div class="grid word-grid" id="wordGrid"></div>
+          <h2 style="margin-top: 24px;">Daily Useful Sentences</h2>
+          <div class="sentence-list" id="sentenceList"></div>
+          <h2 style="margin-top: 24px;">Yesterday</h2>
+          <div id="yesterdayPanel"></div>
+        </section>
+
+        <section id="practicePanel" class="hidden">
+          <h2>Five Sentence Practice</h2>
+          <p class="note">Translate each English prompt into Māori. The checker accepts macron-free typing, but the answer shown keeps macrons so you can learn the spelling.</p>
+          <div class="grid" id="practiceList"></div>
+          <div class="small-actions">
+            <button class="action" id="checkAnswers">Check answers</button>
+            <button class="action ghost" id="newQuiz">Refresh quiz</button>
+          </div>
+        </section>
+
+        <section id="selfPracticePanel" class="hidden">
+          <h2>Self-practice</h2>
+          <p class="note">Write Māori words or sentences you want to test. The checker compares them with your lesson bank, restores known macrons, and suggests close corrections when it can.</p>
+          <div class="self-controls">
+            <textarea id="selfPracticeInput" rows="10" aria-label="Self-practice Māori writing" placeholder="Example: Kei te pai ahau.&#10;kia ora e hoa"></textarea>
+            <div class="small-actions">
+              <button class="action" id="checkSelfPractice">Check self-practice</button>
+              <button class="action ghost" id="clearSelfPractice">Clear</button>
+            </div>
+          </div>
+          <div class="self-result grid" id="selfPracticeResult"></div>
+
+          <div class="self-controls" style="margin-top: 20px;">
+            <h3 style="margin-bottom: 4px;">Upload practice recordings</h3>
+            <p class="note">Upload a video or audio recording of yourself practising today's words and sentences. Recordings are saved in this browser and will also show up on today's date in the History tab.</p>
+            <div class="small-actions">
+              <button class="action ghost" id="uploadVideoBtn">Upload video</button>
+              <button class="action ghost" id="uploadAudioBtn">Upload audio</button>
+            </div>
+            <input class="file-input" id="videoUploadInput" type="file" accept="video/*">
+            <input class="file-input" id="audioUploadInput" type="file" accept="audio/*">
+            <div id="selfMediaList" class="grid"></div>
+          </div>
+        </section>
+
+        <section id="historyPanel" class="hidden">
+          <h2>Learning History</h2>
+          <div id="historyList" class="history-list"></div>
+        </section>
+      </div>
+
+      <aside id="progressPanel">
+        <div class="progress-head">
+          <h3>Your Progress</h3>
+          <button class="mini-button" id="toggleProgress" aria-expanded="true" title="Minimize progress panel">−</button>
+        </div>
+        <div class="progress-body">
+          <div class="progress" aria-label="Curriculum progress"><div id="progressBar"></div></div>
+          <div class="stat"><span>Days opened</span><strong id="daysOpened">0</strong></div>
+          <div class="stat"><span>Words learned</span><strong id="wordsLearned">0</strong></div>
+          <div class="stat"><span>Sentences learned</span><strong id="sentencesLearned">0</strong></div>
+          <div class="stat"><span>Self-practice entries</span><strong id="selfPracticeCount">0</strong></div>
+          <div class="stat"><span>Recordings saved</span><strong id="recordingsCount">0</strong></div>
+          <div class="stat"><span>Last quiz score</span><strong id="lastScore">-</strong></div>
+          <div class="small-actions">
+            <button class="action ghost danger" id="resetProgress">Reset</button>
+          </div>
+        </div>
+        <p class="note">Tip: learn the short vowels first, then treat macrons as meaning a longer vowel sound. Accurate macrons matter, even when the checker is lenient.</p>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const lessons = [
+      {
+        words: [
+          ["kia ora", "hello, thank you", "A warm everyday greeting."],
+          ["whānau", "family", "Also used for extended family."],
+          ["kai", "food, meal", "Useful around meals and invitations."],
+          ["wai", "water", "Also appears in many place names."],
+          ["aroha", "love, compassion", "Often used for care and affection."]
+        ],
+        sentences: [
+          ["Kia ora, e hoa.", "Hello, friend."],
+          ["Kei te pēhea koe?", "How are you?"],
+          ["Kei te pai ahau.", "I am well."]
+        ]
+      },
+      {
+        words: [
+          ["ata", "morning", "Often in ata mārie."],
+          ["pō", "night", "Also evening in common contexts."],
+          ["mahi", "work", "Can be a noun or verb."],
+          ["kāinga", "home", "A place of belonging."],
+          ["hoa", "friend", "Use e hoa when addressing someone."]
+        ],
+        sentences: [
+          ["Ata mārie.", "Good morning."],
+          ["Ka kite anō.", "See you again."],
+          ["Kei te haere au ki te kāinga.", "I am going home."]
+        ]
+      },
+      {
+        words: [
+          ["ingoa", "name", "Used in introductions."],
+          ["tēnei", "this", "Near the speaker."],
+          ["tērā", "that", "Away from the speaker."],
+          ["pai", "good", "A core adjective."],
+          ["nui", "big, many", "Also used for emphasis."]
+        ],
+        sentences: [
+          ["Ko wai tō ingoa?", "What is your name?"],
+          ["Ko Alex tōku ingoa.", "My name is Alex."],
+          ["He rā pai tēnei.", "This is a good day."]
+        ]
+      },
+      {
+        words: [
+          ["haere", "go, come", "Meaning depends on direction and context."],
+          ["mai", "towards speaker", "Used in welcome phrases."],
+          ["noho", "sit, stay, live", "Very common everyday verb."],
+          ["tamariki", "children", "Plural noun."],
+          ["ako", "learn, teach", "Both learning and teaching."]
+        ],
+        sentences: [
+          ["Haere mai.", "Welcome, come here."],
+          ["E ako ana au i te reo Māori.", "I am learning the Māori language."],
+          ["Kei hea ngā tamariki?", "Where are the children?"]
+        ]
+      },
+      {
+        words: [
+          ["pukapuka", "book", "Also document."],
+          ["kura", "school", "Also red in another context."],
+          ["rā", "day, sun", "Context gives the meaning."],
+          ["marama", "moon, month", "Also clear or light."],
+          ["tahi", "one", "First number."]
+        ],
+        sentences: [
+          ["Kei hea taku pukapuka?", "Where is my book?"],
+          ["Kei te kura ia.", "He or she is at school."],
+          ["Kotahi te rā.", "There is one day."]
+        ]
+      },
+      {
+        words: [
+          ["rua", "two", "Number two."],
+          ["toru", "three", "Number three."],
+          ["whā", "four", "Number four."],
+          ["rima", "five", "Number five."],
+          ["ono", "six", "Number six."]
+        ],
+        sentences: [
+          ["E rua aku pukapuka.", "I have two books."],
+          ["E toru ngā tamariki.", "There are three children."],
+          ["E rima ngā rā.", "There are five days."]
+        ]
+      },
+      {
+        words: [
+          ["inu", "drink", "Verb or noun."],
+          ["hiahia", "want, wish", "Useful for requests."],
+          ["āwhina", "help", "Also support."],
+          ["hīkoi", "walk", "A walk or to walk."],
+          ["tere", "fast", "Speed or quickness."]
+        ],
+        sentences: [
+          ["Kei te hiahia au ki te wai.", "I want water."],
+          ["Āwhinatia mai ahau.", "Please help me."],
+          ["Kei te hīkoi mātou.", "We are walking."]
+        ]
+      },
+      {
+        words: [
+          ["mātou", "we, not you", "Exclusive we."],
+          ["tātou", "we, including you", "Inclusive we."],
+          ["koutou", "you all", "Three or more people."],
+          ["rātou", "they", "Three or more people."],
+          ["ia", "he, she, they singular", "Gender-neutral third person."]
+        ],
+        sentences: [
+          ["Kei te pai tātou.", "We are well."],
+          ["Kei hea koutou?", "Where are you all?"],
+          ["Kei te mahi rātou.", "They are working."]
+        ]
+      },
+      {
+        words: [
+          ["wā", "time", "General time."],
+          ["āhea", "when", "Question word."],
+          ["ināianei", "now", "Right now."],
+          ["āpōpō", "tomorrow", "Next day."],
+          ["inanahi", "yesterday", "Previous day."]
+        ],
+        sentences: [
+          ["Āhea koe e haere ai?", "When are you going?"],
+          ["Kei te ako au ināianei.", "I am studying now."],
+          ["Ka kite au i a koe āpōpō.", "I will see you tomorrow."]
+        ]
+      },
+      {
+        words: [
+          ["whare", "house, building", "Core noun."],
+          ["ruma", "room", "Borrowed everyday word."],
+          ["tēpu", "table", "Borrowed everyday word."],
+          ["tūru", "chair", "Borrowed everyday word."],
+          ["kuaha", "door", "Entry point."]
+        ],
+        sentences: [
+          ["Kei roto au i te whare.", "I am inside the house."],
+          ["Kei runga te pukapuka i te tēpu.", "The book is on the table."],
+          ["Katia te kuaha.", "Close the door."]
+        ]
+      },
+      {
+        words: [
+          ["roto", "inside", "Location word."],
+          ["waho", "outside", "Location word."],
+          ["runga", "above, on", "Location word."],
+          ["raro", "below, under", "Location word."],
+          ["taha", "side", "Beside or side."]
+        ],
+        sentences: [
+          ["Kei waho te tamaiti.", "The child is outside."],
+          ["Kei raro te pēke i te tūru.", "The bag is under the chair."],
+          ["Kei tōku taha koe.", "You are beside me."]
+        ]
+      },
+      {
+        words: [
+          ["tinana", "body", "Physical body."],
+          ["ringa", "hand, arm", "Context decides."],
+          ["waewae", "leg, foot", "Context decides."],
+          ["kanohi", "face, eye", "Context decides."],
+          ["māhunga", "head", "A common body word."]
+        ],
+        sentences: [
+          ["Horoia ō ringa.", "Wash your hands."],
+          ["Kei te mamae tōku waewae.", "My leg hurts."],
+          ["Titiro mai ki ahau.", "Look at me."]
+        ]
+      },
+      {
+        words: [
+          ["wera", "hot", "Temperature."],
+          ["makariri", "cold", "Temperature."],
+          ["ua", "rain", "Weather noun."],
+          ["hau", "wind, air", "Weather and breath."],
+          ["rangi", "sky, day, weather", "Broad everyday word."]
+        ],
+        sentences: [
+          ["He makariri te rā nei.", "It is cold today."],
+          ["Kei te ua.", "It is raining."],
+          ["He kaha te hau.", "The wind is strong."]
+        ]
+      },
+      {
+        words: [
+          ["māmā", "easy, mother", "Context decides."],
+          ["uaua", "difficult", "Also muscle."],
+          ["pātai", "question, ask", "Noun or verb."],
+          ["whakautu", "answer, reply", "Noun or verb."],
+          ["mārama", "clear, understand", "Also light."]
+        ],
+        sentences: [
+          ["He pātai tāku.", "I have a question."],
+          ["Kāore au i te mārama.", "I do not understand."],
+          ["He māmā tēnei mahi.", "This work is easy."]
+        ]
+      },
+      {
+        words: [
+          ["tino", "very", "Intensifier."],
+          ["iti", "small", "Size word."],
+          ["hou", "new", "Recent or new."],
+          ["tawhito", "old", "Older thing or idea."],
+          ["ataahua", "beautiful", "Lovely or attractive."]
+        ],
+        sentences: [
+          ["He tino pai tēnei kai.", "This food is very good."],
+          ["He whare hou tērā.", "That is a new house."],
+          ["He ataahua te rangi.", "The day is beautiful."]
+        ]
+      },
+      {
+        words: [
+          ["hoko", "buy, sell", "Commerce verb."],
+          ["utu", "price, cost, pay", "Money or repayment."],
+          ["toa", "shop, store", "Also brave person."],
+          ["moni", "money", "Borrowed everyday word."],
+          ["hēneti", "cent", "Money word."]
+        ],
+        sentences: [
+          ["E hia te utu?", "How much is the price?"],
+          ["Kei te haere au ki te toa.", "I am going to the shop."],
+          ["Kāore āku moni.", "I have no money."]
+        ]
+      },
+      {
+        words: [
+          ["karaka", "clock, orange", "Context decides."],
+          ["hāora", "hour", "Time word."],
+          ["meneti", "minute", "Time word."],
+          ["moata", "early", "Time word."],
+          ["tōmuri", "late", "Time word."]
+        ],
+        sentences: [
+          ["He aha te wā?", "What is the time?"],
+          ["Kua tōmuri ahau.", "I am late."],
+          ["Me haere moata tātou.", "We should go early."]
+        ]
+      },
+      {
+        words: [
+          ["waka", "vehicle, canoe", "Transport word."],
+          ["pahi", "bus", "Transport word."],
+          ["motokā", "car", "Transport word."],
+          ["rere", "fly, flow", "Movement word."],
+          ["tae", "arrive", "Reach a place."]
+        ],
+        sentences: [
+          ["Kei hea te pahi?", "Where is the bus?"],
+          ["Kua tae mai ia.", "He or she has arrived."],
+          ["Kei te rere te waka rererangi.", "The airplane is flying."]
+        ]
+      },
+      {
+        words: [
+          ["taha mauī", "left side", "Direction."],
+          ["taha matau", "right side", "Direction."],
+          ["tika", "correct, right", "Accuracy or direction."],
+          ["hē", "wrong, error", "Incorrect."],
+          ["tata", "near", "Close by."]
+        ],
+        sentences: [
+          ["Huri ki te taha mauī.", "Turn left."],
+          ["Huri ki te taha matau.", "Turn right."],
+          ["Kei te tata te kura.", "The school is nearby."]
+        ]
+      },
+      {
+        words: [
+          ["ora", "health, life", "Wellbeing word."],
+          ["mauiui", "sick", "Unwell."],
+          ["rongoā", "medicine", "Medicine or remedy."],
+          ["tākuta", "doctor", "Health worker."],
+          ["hohipera", "hospital", "Health place."]
+        ],
+        sentences: [
+          ["Kei te mauiui ahau.", "I am sick."],
+          ["Me haere au ki te tākuta.", "I should go to the doctor."],
+          ["Kei hea te hohipera?", "Where is the hospital?"]
+        ]
+      },
+      {
+        words: [
+          ["hari", "happy, joy", "Feeling word."],
+          ["pōuri", "sad, dark", "Context decides."],
+          ["riri", "angry", "Anger."],
+          ["ngenge", "tired", "Fatigue."],
+          ["māia", "brave, confident", "Courage."]
+        ],
+        sentences: [
+          ["Kei te hari ahau.", "I am happy."],
+          ["Kei te ngenge koe?", "Are you tired?"],
+          ["Kia māia.", "Be brave."]
+        ]
+      },
+      {
+        words: [
+          ["waiata", "song, sing", "Noun or verb."],
+          ["kanikani", "dance", "Noun or verb."],
+          ["kēmu", "game", "Borrowed word."],
+          ["pāpāho", "media, broadcast", "Modern word."],
+          ["pikitia", "picture, movie", "Borrowed word."]
+        ],
+        sentences: [
+          ["Kei te waiata rātou.", "They are singing."],
+          ["He pai ki ahau tēnei kēmu.", "I like this game."],
+          ["Me mātakitaki tātou i te pikitia.", "We should watch the movie."]
+        ]
+      },
+      {
+        words: [
+          ["pai ki", "like", "Often with he pai ki..."],
+          ["kino", "bad", "Opposite of good."],
+          ["reka", "sweet, delicious", "Taste word."],
+          ["kawa", "sour, bitter", "Taste or protocol."],
+          ["hōhā", "annoyed, bored", "Feeling word."]
+        ],
+        sentences: [
+          ["He pai ki ahau te kawhe.", "I like coffee."],
+          ["He reka tēnei kai.", "This food is delicious."],
+          ["Kāore au i te hōhā.", "I am not bored."]
+        ]
+      },
+      {
+        words: [
+          ["kākahu", "clothes", "Clothing."],
+          ["hū", "shoe", "Footwear."],
+          ["pōtae", "hat", "Headwear."],
+          ["mā", "white", "Color."],
+          ["pango", "black", "Color."]
+        ],
+        sentences: [
+          ["Kei hea ōku hū?", "Where are my shoes?"],
+          ["He pōtae mā tēnei.", "This is a white hat."],
+          ["He kākahu pango ōna.", "He or she has black clothes."]
+        ]
+      },
+      {
+        words: [
+          ["whero", "red", "Color."],
+          ["kākāriki", "green", "Color."],
+          ["kōwhai", "yellow", "Color."],
+          ["kikorangi", "blue", "Color."],
+          ["parauri", "brown", "Color."]
+        ],
+        sentences: [
+          ["He whero te motokā.", "The car is red."],
+          ["He kākāriki te rākau.", "The tree is green."],
+          ["He kikorangi te rangi.", "The sky is blue."]
+        ]
+      },
+      {
+        words: [
+          ["rākau", "tree, stick", "Nature word."],
+          ["moana", "sea, ocean", "Water word."],
+          ["awa", "river", "Waterway."],
+          ["maunga", "mountain", "Landmark."],
+          ["one", "sand, soil", "Ground material."]
+        ],
+        sentences: [
+          ["Kei te moana mātou.", "We are at the sea."],
+          ["He nui te maunga.", "The mountain is big."],
+          ["Kei te taha o te awa te rākau.", "The tree is beside the river."]
+        ]
+      },
+      {
+        words: [
+          ["karakia", "prayer, incantation", "Context-sensitive cultural word."],
+          ["marae", "Māori meeting ground", "Important cultural place."],
+          ["hui", "meeting, gathering", "Gathering or meeting."],
+          ["mana", "prestige, authority", "Cultural concept."],
+          ["tapu", "sacred, restricted", "Cultural concept."]
+        ],
+        sentences: [
+          ["Kei te haere mātou ki te marae.", "We are going to the marae."],
+          ["He hui tō mātou āpōpō.", "We have a meeting tomorrow."],
+          ["He nui te mana o te reo.", "The language has great mana."]
+        ]
+      },
+      {
+        words: [
+          ["kōrero", "speak, talk, story", "Core communication word."],
+          ["whakarongo", "listen", "Hear actively."],
+          ["pānui", "read, notice", "Reading or notice."],
+          ["tuhi", "write, draw", "Writing word."],
+          ["mahara", "remember, thought", "Memory or thinking."]
+        ],
+        sentences: [
+          ["Kōrero mai ki ahau.", "Speak to me."],
+          ["Whakarongo ki te kaiako.", "Listen to the teacher."],
+          ["Me tuhi au i tēnei rerenga.", "I should write this sentence."]
+        ]
+      }
+    ];
+
+    const extraPrompts = [
+      ["Thank you, friend.", "Kia ora, e hoa."],
+      ["I am learning now.", "Kei te ako au ināianei."],
+      ["This food is good.", "He pai tēnei kai."],
+      ["Where is the water?", "Kei hea te wai?"],
+      ["We are going home.", "Kei te haere mātou ki te kāinga."]
+    ];
+
+    const storageKey = "maoriDailyPractice.v1";
+    const todayKey = localDateKey();
+    const state = loadState();
+    const currentIndex = getCurrentLessonIndex();
+    let quizItems = [];
+
+    function localDateKey(date = new Date()) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function loadState() {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
+      if (saved) {
+        saved.openedDates = Array.isArray(saved.openedDates) ? saved.openedDates : [];
+        saved.learnedDates = Array.isArray(saved.learnedDates) ? saved.learnedDates : [];
+        saved.quizScores = saved.quizScores || {};
+        saved.practiceLog = saved.practiceLog || {};
+        saved.selfPractice = saved.selfPractice || {};
+        saved.media = saved.media || {};
+        saved.ui = saved.ui || {};
+        saved.firstDate = saved.firstDate || todayKey;
+        if (!saved.openedDates.includes(todayKey)) saved.openedDates.push(todayKey);
+        saveState(saved);
+        return saved;
+      }
+      const fresh = {
+        firstDate: todayKey,
+        openedDates: [todayKey],
+        learnedDates: [],
+        quizScores: {},
+        practiceLog: {},
+        selfPractice: {},
+        media: {},
+        ui: {}
+      };
+      saveState(fresh);
+      return fresh;
+    }
+
+    function saveState(next = state) {
+      localStorage.setItem(storageKey, JSON.stringify(next));
+    }
+
+    function daysBetween(start, end) {
+      const a = new Date(start + "T00:00:00");
+      const b = new Date(end + "T00:00:00");
+      return Math.max(0, Math.floor((b - a) / 86400000));
+    }
+
+    function getCurrentLessonIndex() {
+      return daysBetween(state.firstDate, todayKey) % lessons.length;
+    }
+
+    function lessonForDate(dateKey) {
+      const index = daysBetween(state.firstDate, dateKey) % lessons.length;
+      return lessons[index];
+    }
+
+    function dailySentences(lesson) {
+      return lesson.sentences.slice(0, 2);
+    }
+
+    function formatDate(dateKey) {
+      return new Date(dateKey + "T12:00:00").toLocaleDateString(undefined, {
+        weekday: "short", month: "short", day: "numeric", year: "numeric"
+      });
+    }
+
+    function normalize(text) {
+      return (text || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[.,!?;:'"“”‘’]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function similarity(a, b) {
+      const left = normalize(a);
+      const right = normalize(b);
+      if (!left || !right) return 0;
+      if (left === right) return 1;
+      const aWords = new Set(left.split(" "));
+      const bWords = new Set(right.split(" "));
+      let overlap = 0;
+      aWords.forEach(word => { if (bWords.has(word)) overlap++; });
+      return overlap / Math.max(aWords.size, bWords.size);
+    }
+
+    function escapeHtml(text) {
+      return String(text || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function knownItems() {
+      const items = [];
+      lessons.forEach((lesson, lessonIndex) => {
+        lesson.words.forEach(word => items.push({
+          type: "word",
+          maori: word[0],
+          english: word[1],
+          source: `Lesson ${lessonIndex + 1}`
+        }));
+        dailySentences(lesson).forEach(sentence => items.push({
+          type: "sentence",
+          maori: sentence[0],
+          english: sentence[1],
+          source: `Lesson ${lessonIndex + 1}`
+        }));
+      });
+      extraPrompts.forEach(item => items.push({
+        type: "sentence",
+        maori: item[1],
+        english: item[0],
+        source: "Starter practice"
+      }));
+      return items;
+    }
+
+    function findBestKnownItem(text) {
+      let best = null;
+      knownItems().forEach(item => {
+        const grade = similarity(text, item.maori);
+        if (!best || grade > best.grade) best = { ...item, grade };
+      });
+      return best;
+    }
+
+    function restoreKnownMacrons(text) {
+      const replacements = new Map();
+      knownItems().forEach(item => {
+        item.maori.split(/\s+/).forEach(raw => {
+          const clean = raw.replace(/[.,!?;:'"“”‘’]/g, "");
+          if (clean) replacements.set(normalize(clean), clean);
+        });
+      });
+      return String(text || "").split(/(\s+)/).map(part => {
+        if (/^\s+$/.test(part)) return part;
+        const edge = part.match(/^([^A-Za-zĀĒĪŌŪāēīōū]*)(.*?)([^A-Za-zĀĒĪŌŪāēīōū]*)$/);
+        if (!edge) return part;
+        const replacement = replacements.get(normalize(edge[2]));
+        return replacement ? `${edge[1]}${replacement}${edge[3]}` : part;
+      }).join("");
+    }
+
+    function selfPracticeEntries(dateKey) {
+      return Array.isArray(state.selfPractice[dateKey]) ? state.selfPractice[dateKey] : [];
+    }
+
+    function practiceEntries(dateKey) {
+      return Array.isArray(state.practiceLog[dateKey]) ? state.practiceLog[dateKey] : [];
+    }
+
+    function mediaEntries(dateKey) {
+      return Array.isArray(state.media[dateKey]) ? state.media[dateKey] : [];
+    }
+
+    function totalMediaCount() {
+      return Object.values(state.media || {}).reduce((sum, entries) => sum + (Array.isArray(entries) ? entries.length : 0), 0);
+    }
+
+    function makeMediaId() {
+      return `m-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    }
+
+    const mediaDbName = "maoriPracticeMediaDB";
+    let mediaDbPromise = null;
+
+    function openMediaDb() {
+      if (!mediaDbPromise) {
+        mediaDbPromise = new Promise((resolve, reject) => {
+          if (!("indexedDB" in window)) {
+            reject(new Error("This browser does not support saved recordings."));
+            return;
+          }
+          const request = indexedDB.open(mediaDbName, 1);
+          request.onupgradeneeded = () => {
+            const db = request.result;
+            if (!db.objectStoreNames.contains("media")) {
+              db.createObjectStore("media", { keyPath: "id" });
+            }
+          };
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        });
+      }
+      return mediaDbPromise;
+    }
+
+    async function saveMediaBlob(record) {
+      const db = await openMediaDb();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction("media", "readwrite");
+        tx.objectStore("media").put(record);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    async function getMediaBlob(id) {
+      const db = await openMediaDb();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction("media", "readonly");
+        const request = tx.objectStore("media").get(id);
+        request.onsuccess = () => resolve(request.result || null);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    async function deleteMediaBlob(id) {
+      const db = await openMediaDb();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction("media", "readwrite");
+        tx.objectStore("media").delete(id);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    async function handleMediaUpload(file, kind) {
+      if (!file) return;
+      const id = makeMediaId();
+      try {
+        await saveMediaBlob({ id, blob: file, type: kind, mimeType: file.type, name: file.name });
+      } catch (error) {
+        alert(`Could not save the ${kind} recording: ${error.message}`);
+        return;
+      }
+      const entry = {
+        id,
+        type: kind,
+        name: file.name,
+        mimeType: file.type,
+        size: file.size,
+        uploadedAt: new Date().toISOString()
+      };
+      state.media[todayKey] = mediaEntries(todayKey).concat(entry);
+      saveState();
+      renderSelfMedia();
+      renderStats();
+    }
+
+    async function removeMedia(id) {
+      try {
+        await deleteMediaBlob(id);
+      } catch (error) {
+        alert(`Could not remove the recording: ${error.message}`);
+        return;
+      }
+      Object.keys(state.media).forEach(key => {
+        state.media[key] = mediaEntries(key).filter(item => item.id !== id);
+      });
+      saveState();
+      renderSelfMedia();
+      if (!document.getElementById("historyPanel").classList.contains("hidden")) renderHistory();
+      renderStats();
+    }
+
+    async function attachMediaPlayer(entry, selector) {
+      const container = document.querySelector(selector);
+      if (!container) return;
+      try {
+        const record = await getMediaBlob(entry.id);
+        if (!record || !record.blob) {
+          container.innerHTML = `<div class="media-empty">Recording data was not found in this browser.</div>`;
+          return;
+        }
+        const url = URL.createObjectURL(record.blob);
+        const tag = entry.type === "video" ? "video" : "audio";
+        container.innerHTML = `<${tag} controls preload="metadata" src="${url}"></${tag}>`;
+      } catch (error) {
+        container.innerHTML = `<div class="media-empty">Could not load this recording.</div>`;
+      }
+    }
+
+    function renderSelfMedia() {
+      const list = document.getElementById("selfMediaList");
+      const entries = mediaEntries(todayKey);
+      if (!entries.length) {
+        list.innerHTML = `<div class="empty">No recordings uploaded today yet.</div>`;
+        return;
+      }
+      list.innerHTML = entries.map(entry => `
+        <article class="media-item">
+          <div class="media-meta">
+            <span>${escapeHtml(entry.name)} (${entry.type})</span>
+            <button class="mini-button danger" data-remove-media="${entry.id}">Remove</button>
+          </div>
+          <div data-player="self-${entry.id}"></div>
+        </article>
+      `).join("");
+
+      entries.forEach(entry => attachMediaPlayer(entry, `[data-player="self-${entry.id}"]`));
+
+      list.querySelectorAll("[data-remove-media]").forEach(button => {
+        button.addEventListener("click", () => removeMedia(button.getAttribute("data-remove-media")));
+      });
+    }
+
+    function mediaSectionHtml(dateKey) {
+      const entries = mediaEntries(dateKey);
+      if (!entries.length) return "";
+      return `
+        <div class="note" style="margin-top: 12px;">Uploaded recordings</div>
+        ${entries.map(entry => `
+          <div class="media-item">
+            <div class="media-meta"><span>${escapeHtml(entry.name)} (${entry.type})</span></div>
+            <div data-player="history-${entry.id}"></div>
+          </div>
+        `).join("")}
+      `;
+    }
+
+    function reviewExtras(dateKey) {
+      const practiced = practiceEntries(dateKey);
+      const selfPracticed = selfPracticeEntries(dateKey);
+      const practiceHtml = practiced.length ? `
+        <div class="note" style="margin-top: 12px;">Practised quiz sentences</div>
+        ${practiced.map(item => `<p><span class="maori" style="font-size: 18px;">${escapeHtml(item.model)}</span><br><span class="meaning">${escapeHtml(item.prompt)}</span></p>`).join("")}
+      ` : "";
+      const selfHtml = selfPracticed.length ? `
+        <div class="note" style="margin-top: 12px;">Self-practised writing</div>
+        ${selfPracticed.map(item => `
+          <div class="self-entry">
+            <span><strong>You wrote:</strong> ${escapeHtml(item.input)}</span>
+            <span><strong>Suggestion:</strong> ${escapeHtml(item.suggestion)}</span>
+            <span class="note">${escapeHtml(item.message)}</span>
+          </div>
+        `).join("")}
+      ` : "";
+      return practiceHtml + selfHtml;
+    }
+
+    function renderToday() {
+      const lesson = lessons[currentIndex];
+      document.getElementById("todayLabel").textContent = formatDate(todayKey);
+      document.getElementById("dayNumber").textContent = `Day ${daysBetween(state.firstDate, todayKey) + 1}`;
+
+      document.getElementById("wordGrid").innerHTML = lesson.words.map(word => `
+        <article class="word">
+          <div class="maori">${word[0]}</div>
+          <div class="meaning">${word[1]}</div>
+          <div class="note">${word[2]}</div>
+        </article>
+      `).join("");
+
+      document.getElementById("sentenceList").innerHTML = dailySentences(lesson).map(sentence => `
+        <article class="sentence">
+          <div class="maori">${sentence[0]}</div>
+          <div class="meaning">${sentence[1]}</div>
+        </article>
+      `).join("");
+
+      const markButton = document.getElementById("markLearned");
+      markButton.textContent = state.learnedDates.includes(todayKey) ? "Today is learned" : "Mark today learned";
+      markButton.disabled = state.learnedDates.includes(todayKey);
+    }
+
+    function renderYesterday() {
+      const yesterday = new Date(todayKey + "T12:00:00");
+      yesterday.setDate(yesterday.getDate() - 1);
+      const key = localDateKey(yesterday);
+      const hasActivity = state.openedDates.includes(key) || practiceEntries(key).length || selfPracticeEntries(key).length;
+      const canShow = daysBetween(state.firstDate, key) >= 0 && hasActivity;
+      const panel = document.getElementById("yesterdayPanel");
+      if (!canShow) {
+        panel.innerHTML = `<div class="empty">No saved lesson from yesterday yet. After your next daily visit, this area will show the words and sentences from the day before.</div>`;
+        return;
+      }
+      const lesson = lessonForDate(key);
+      panel.innerHTML = `
+        <div class="history-day">
+          <strong>${formatDate(key)}</strong>
+          <div class="note">Words</div>
+          <ul class="mini-list">${lesson.words.map(word => `<li>${word[0]}: ${word[1]}</li>`).join("")}</ul>
+          <div class="note" style="margin-top: 12px;">Sentences</div>
+          ${dailySentences(lesson).map(sentence => `<p><span class="maori" style="font-size: 18px;">${sentence[0]}</span><br><span class="meaning">${sentence[1]}</span></p>`).join("")}
+          ${reviewExtras(key)}
+        </div>
+      `;
+    }
+
+    function buildPromptBank() {
+      const learnedKeys = state.learnedDates.length ? state.learnedDates : [todayKey];
+      const bank = [];
+      learnedKeys.forEach(key => {
+        const lesson = lessonForDate(key);
+        dailySentences(lesson).forEach(sentence => bank.push({ prompt: sentence[1], answer: sentence[0], source: formatDate(key) }));
+      });
+
+      const wordPrompts = [];
+      learnedKeys.forEach(key => {
+        lessonForDate(key).words.forEach(word => {
+          wordPrompts.push({
+            prompt: `Use “${word[1]}” in Māori.`,
+            answer: word[0],
+            source: formatDate(key)
+          });
+        });
+      });
+      Object.entries(state.selfPractice).forEach(([key, entries]) => {
+        if (!Array.isArray(entries)) return;
+        entries.forEach(entry => {
+          if (entry.suggestion) {
+            bank.push({
+              prompt: "Rewrite your self-practised Māori sentence.",
+              answer: entry.suggestion,
+              source: `Self-practice, ${formatDate(key)}`
+            });
+          }
+        });
+      });
+      return bank.concat(extraPrompts.map(item => ({ prompt: item[0], answer: item[1], source: "Starter practice" })), wordPrompts);
+    }
+
+    function seededPick(items, count) {
+      const seed = Array.from(todayKey).reduce((sum, char) => sum + char.charCodeAt(0), 0) + state.learnedDates.length;
+      const copy = [...items];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = (seed + i * 17) % (i + 1);
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy.slice(0, count);
+    }
+
+    function renderQuiz(refresh = false) {
+      if (!quizItems.length || refresh) {
+        quizItems = seededPick(buildPromptBank(), 5);
+      }
+      document.getElementById("practiceList").innerHTML = quizItems.map((item, index) => `
+        <article class="practice-item">
+          <div class="prompt">${index + 1}. ${item.prompt}</div>
+          <textarea class="practice-answer" rows="1" id="answer${index}" aria-label="Answer ${index + 1}"></textarea>
+          <div class="feedback" id="feedback${index}">Source: ${item.source}</div>
+        </article>
+      `).join("");
+    }
+
+    function checkAnswers() {
+      let score = 0;
+      quizItems.forEach((item, index) => {
+        const answer = document.getElementById(`answer${index}`).value;
+        const grade = similarity(answer, item.answer);
+        const feedback = document.getElementById(`feedback${index}`);
+        if (grade >= 0.86) {
+          score++;
+          feedback.className = "feedback good";
+          feedback.innerHTML = `Correct. Model answer: <strong>${item.answer}</strong>`;
+        } else if (grade >= 0.55) {
+          feedback.className = "feedback fix";
+          feedback.innerHTML = `Close. Better answer: <strong>${item.answer}</strong>`;
+        } else {
+          feedback.className = "feedback fix";
+          feedback.innerHTML = `Not quite. Correct answer: <strong>${item.answer}</strong>`;
+        }
+      });
+      state.practiceLog[todayKey] = quizItems.map((item, index) => ({
+        prompt: item.prompt,
+        model: item.answer,
+        answer: document.getElementById(`answer${index}`).value,
+        checkedAt: new Date().toISOString()
+      }));
+      state.quizScores[todayKey] = score;
+      saveState();
+      renderYesterday();
+      renderStats();
+    }
+
+    function renderHistory() {
+      const list = document.getElementById("historyList");
+      const allDates = Array.from(new Set([
+        ...state.openedDates,
+        ...Object.keys(state.practiceLog || {}),
+        ...Object.keys(state.selfPractice || {}),
+        ...Object.keys(state.media || {})
+      ])).sort();
+      if (!allDates.length) {
+        list.innerHTML = `<div class="empty">No history yet.</div>`;
+        return;
+      }
+      list.innerHTML = allDates.reverse().map(key => {
+        const lesson = lessonForDate(key);
+        return `
+          <article class="history-day">
+            <strong>${formatDate(key)}${state.learnedDates.includes(key) ? " · learned" : ""}</strong>
+            <ul class="mini-list">${lesson.words.map(word => `<li>${word[0]}: ${word[1]}</li>`).join("")}</ul>
+            ${dailySentences(lesson).map(sentence => `<p><span class="maori" style="font-size: 18px;">${sentence[0]}</span><br><span class="meaning">${sentence[1]}</span></p>`).join("")}
+            ${reviewExtras(key)}
+            ${mediaSectionHtml(key)}
+          </article>
+        `;
+      }).join("");
+      allDates.forEach(key => {
+        mediaEntries(key).forEach(entry => attachMediaPlayer(entry, `[data-player="history-${entry.id}"]`));
+      });
+    }
+
+    function renderStats() {
+      document.getElementById("daysOpened").textContent = state.openedDates.length;
+      document.getElementById("wordsLearned").textContent = state.learnedDates.length * 5;
+      document.getElementById("sentencesLearned").textContent = state.learnedDates.length * 2;
+      document.getElementById("selfPracticeCount").textContent = Object.values(state.selfPractice || {}).reduce((sum, entries) => sum + (Array.isArray(entries) ? entries.length : 0), 0);
+      document.getElementById("recordingsCount").textContent = totalMediaCount();
+      document.getElementById("lastScore").textContent = state.quizScores[todayKey] == null ? "-" : `${state.quizScores[todayKey]}/5`;
+      const progress = Math.min(100, Math.round((state.learnedDates.length / lessons.length) * 100));
+      document.getElementById("progressBar").style.width = `${progress}%`;
+    }
+
+    function checkSelfPractice() {
+      const input = document.getElementById("selfPracticeInput").value;
+      const lines = input.split(/\n+/).map(line => line.trim()).filter(Boolean);
+      const result = document.getElementById("selfPracticeResult");
+      if (!lines.length) {
+        result.innerHTML = `<div class="empty">Write one Māori word or sentence first.</div>`;
+        return;
+      }
+
+      const checked = lines.map(line => {
+        const macronRestored = restoreKnownMacrons(line);
+        const best = findBestKnownItem(line);
+        let suggestion = macronRestored;
+        let status = "good";
+        let message = "Looks okay against the words and sentences in your current lesson bank.";
+
+        if (best && best.grade === 1 && normalize(line) === normalize(best.maori)) {
+          suggestion = best.maori;
+          message = line === best.maori ? "Exact match." : "Correct; I restored the usual macrons or punctuation.";
+        } else if (best && best.grade >= 0.72) {
+          suggestion = best.maori;
+          status = "fix";
+          message = `Close to a known ${best.type}: ${best.english}.`;
+        } else if (macronRestored !== line) {
+          status = "fix";
+          message = "I restored known macrons from your lesson vocabulary.";
+        } else {
+          status = "fix";
+          message = "I cannot fully verify this yet. Keep it saved for review, and check it with a teacher or dictionary if it is new material.";
+        }
+
+        return {
+          input: line,
+          suggestion,
+          status,
+          message,
+          checkedAt: new Date().toISOString()
+        };
+      });
+
+      state.selfPractice[todayKey] = selfPracticeEntries(todayKey).concat(checked);
+      saveState();
+      result.innerHTML = checked.map(item => `
+        <article class="self-entry">
+          <div class="feedback ${item.status}">
+            <strong>${item.status === "good" ? "Good" : "Check this"}:</strong> ${escapeHtml(item.message)}
+          </div>
+          <div><strong>You wrote:</strong> ${escapeHtml(item.input)}</div>
+          <div><strong>Suggestion:</strong> <span class="maori" style="font-size: 18px;">${escapeHtml(item.suggestion)}</span></div>
+        </article>
+      `).join("");
+      renderYesterday();
+      renderStats();
+    }
+
+    function applyProgressPanelState() {
+      const aside = document.getElementById("progressPanel");
+      const main = document.querySelector("main");
+      const toggle = document.getElementById("toggleProgress");
+      const minimized = Boolean(state.ui && state.ui.progressMinimized);
+      aside.classList.toggle("minimized", minimized);
+      main.classList.toggle("progress-minimized", minimized);
+      toggle.textContent = minimized ? "+" : "−";
+      toggle.title = minimized ? "Restore progress panel" : "Minimize progress panel";
+      toggle.setAttribute("aria-expanded", String(!minimized));
+    }
+
+    function importProgressFile(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const imported = JSON.parse(reader.result);
+          if (!imported || !Array.isArray(imported.openedDates)) {
+            throw new Error("This does not look like exported progress from this tool.");
+          }
+          const next = {
+            firstDate: imported.firstDate || todayKey,
+            openedDates: Array.isArray(imported.openedDates) ? imported.openedDates : [todayKey],
+            learnedDates: Array.isArray(imported.learnedDates) ? imported.learnedDates : [],
+            quizScores: imported.quizScores || {},
+            practiceLog: imported.practiceLog || {},
+            selfPractice: imported.selfPractice || {},
+            media: imported.media || {},
+            ui: imported.ui || {}
+          };
+          if (!next.openedDates.includes(todayKey)) next.openedDates.push(todayKey);
+          localStorage.setItem(storageKey, JSON.stringify(next));
+          alert("Progress imported. The page will reload now.");
+          location.reload();
+        } catch (error) {
+          alert(`Import failed: ${error.message}`);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function switchPanel(target) {
+      const panels = {
+        Learn: document.getElementById("learnPanel"),
+        Practice: document.getElementById("practicePanel"),
+        SelfPractice: document.getElementById("selfPracticePanel"),
+        History: document.getElementById("historyPanel")
+      };
+      Object.entries(panels).forEach(([name, panel]) => {
+        panel.classList.toggle("hidden", name !== target);
+      });
+      document.querySelectorAll(".tab").forEach(tab => tab.setAttribute("aria-selected", "false"));
+      document.getElementById(`tab${target}`).setAttribute("aria-selected", "true");
+      if (target === "Practice") renderQuiz();
+      if (target === "SelfPractice") renderSelfMedia();
+      if (target === "History") renderHistory();
+    }
+
+    document.getElementById("tabLearn").addEventListener("click", () => switchPanel("Learn"));
+    document.getElementById("tabPractice").addEventListener("click", () => switchPanel("Practice"));
+    document.getElementById("tabSelfPractice").addEventListener("click", () => switchPanel("SelfPractice"));
+    document.getElementById("tabHistory").addEventListener("click", () => switchPanel("History"));
+    document.getElementById("checkAnswers").addEventListener("click", checkAnswers);
+    document.getElementById("newQuiz").addEventListener("click", () => renderQuiz(true));
+    document.getElementById("checkSelfPractice").addEventListener("click", checkSelfPractice);
+    document.getElementById("clearSelfPractice").addEventListener("click", () => {
+      document.getElementById("selfPracticeInput").value = "";
+      document.getElementById("selfPracticeResult").innerHTML = "";
+    });
+    document.getElementById("uploadVideoBtn").addEventListener("click", () => {
+      document.getElementById("videoUploadInput").click();
+    });
+    document.getElementById("uploadAudioBtn").addEventListener("click", () => {
+      document.getElementById("audioUploadInput").click();
+    });
+    document.getElementById("videoUploadInput").addEventListener("change", event => {
+      const file = event.target.files && event.target.files[0];
+      if (file) handleMediaUpload(file, "video");
+      event.target.value = "";
+    });
+    document.getElementById("audioUploadInput").addEventListener("change", event => {
+      const file = event.target.files && event.target.files[0];
+      if (file) handleMediaUpload(file, "audio");
+      event.target.value = "";
+    });
+    document.getElementById("markLearned").addEventListener("click", () => {
+      if (!state.learnedDates.includes(todayKey)) {
+        state.learnedDates.push(todayKey);
+        saveState();
+        renderToday();
+        renderStats();
+      }
+    });
+    document.getElementById("exportData").addEventListener("click", async () => {
+      const payload = JSON.stringify(state, null, 2);
+      const blob = new Blob([payload], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `maori-progress-${todayKey}.json`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+      try {
+        await navigator.clipboard.writeText(payload);
+        alert("Progress downloaded and copied to clipboard.");
+      } catch {
+        alert("Progress downloaded. Clipboard copy was not available in this browser.");
+      }
+    });
+    document.getElementById("importData").addEventListener("click", () => {
+      document.getElementById("importFile").click();
+    });
+    document.getElementById("importFile").addEventListener("change", event => {
+      const file = event.target.files && event.target.files[0];
+      if (file) importProgressFile(file);
+      event.target.value = "";
+    });
+    document.getElementById("toggleProgress").addEventListener("click", () => {
+      state.ui.progressMinimized = !state.ui.progressMinimized;
+      saveState();
+      applyProgressPanelState();
+    });
+    document.getElementById("resetProgress").addEventListener("click", () => {
+      if (confirm("Reset all saved progress for this browser?")) {
+        localStorage.removeItem(storageKey);
+        location.reload();
+      }
+    });
+
+    renderToday();
+    renderYesterday();
+    renderQuiz();
+    renderSelfMedia();
+    renderStats();
+    applyProgressPanelState();
+  </script>
+</body>
+</html>
