@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)file:///C:/Users/Admin/Downloads/maori-learn-v3_2.html -->
+<!-- saved from url=(0052)file:///C:/Users/Admin/Downloads/maori-learn-v4.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   
@@ -359,9 +359,9 @@
 
     .hist-word-chip {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       gap: 6px;
-      padding: 5px 8px;
+      padding: 5px 6px 5px 8px;
       border: 1px solid var(--line);
       border-radius: 6px;
       background: #f8fbf7;
@@ -373,13 +373,29 @@
       font-size: 14px;
       color: var(--green-dark);
       overflow-wrap: anywhere;
+      flex: 1;
     }
 
     .hist-word-chip .hw-eng {
       font-size: 12px;
       color: var(--muted);
       overflow-wrap: anywhere;
+      flex: 1;
     }
+
+    .btn-del {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ccc;
+      font-size: 15px;
+      line-height: 1;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: color .15s, background .15s;
+    }
+    .btn-del:hover { color: var(--rose); background: #fdecea; }
 
     .hist-col-sents {
       display: flex;
@@ -394,10 +410,17 @@
 
     .hist-sent-item {
       border-left: 4px solid var(--gold);
-      padding: 6px 10px;
+      padding: 6px 8px 6px 10px;
       background: #fffaf0;
       border-radius: 0 6px 6px 0;
       margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .hist-sent-item .hs-body {
+      flex: 1;
     }
 
     .hist-sent-item .hs-maori {
@@ -967,7 +990,7 @@ Kia ora, e hoa. | Hello, friend.</pre>
 
         <hr class="rows-sep">
         <div class="section-label">DB summary</div>
-        <div id="dbSummary" class="note"><strong>28</strong> words · <strong>38</strong> sentences · <strong>0</strong> audio files in mydb.</div>
+        <div id="dbSummary" class="note"><strong>28</strong> words · <strong>38</strong> sentences · <strong>1</strong> audio files in mydb.</div>
       </section>
 
       <!-- HISTORY TAB -->
@@ -982,141 +1005,169 @@ Kia ora, e hoa. | Hello, friend.</pre>
         <div class="hist-word-chip">
           <span class="hw-maori">heihei</span>
           <span class="hw-eng">hen</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(26)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">heihei</span>
           <span class="hw-eng">hen/chicken</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(27)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">Hoiho</span>
           <span class="hw-eng">horse</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(24)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">kai</span>
           <span class="hw-eng">food</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(2)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">kapu</span>
           <span class="hw-eng">cup,mug</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(11)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">kau</span>
           <span class="hw-eng">cow</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(23)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">kia ora</span>
           <span class="hw-eng">hello, thank you</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(0)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">Kuri</span>
           <span class="hw-eng">dog</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(21)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">ngeru</span>
           <span class="hw-eng">cat</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(22)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">oka</span>
           <span class="hw-eng">bucher knife</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(10)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">oko</span>
           <span class="hw-eng">container,bowl</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(9)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">pereti</span>
           <span class="hw-eng">plate</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(13)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">pune</span>
           <span class="hw-eng">spoon</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(12)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">rakiraki</span>
           <span class="hw-eng">duck</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(25)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">taku</span>
           <span class="hw-eng">my,mine</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(3)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">taku kapu</span>
           <span class="hw-eng">my cup</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(15)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tāna</span>
           <span class="hw-eng">his/her</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(5)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tana pune</span>
           <span class="hw-eng">his/her spoon</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(17)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tēnā</span>
           <span class="hw-eng">that (near the listener)</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(7)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tena pereti</span>
           <span class="hw-eng">that plate(near you)</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(19)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tēnei</span>
           <span class="hw-eng">this (near the speaker)</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(6)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tenei kapu</span>
           <span class="hw-eng">this cup</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(18)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tērā</span>
           <span class="hw-eng">that over there</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(8)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tera oko</span>
           <span class="hw-eng">that basket over there</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(20)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tirou</span>
           <span class="hw-eng">fork</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(14)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">tō</span>
           <span class="hw-eng">your, yours</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(4)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">to pereti</span>
           <span class="hw-eng">your plate</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(16)">✕</button>
         </div>
       
         <div class="hist-word-chip">
           <span class="hw-maori">whanau</span>
           <span class="hw-eng">family</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(1)">✕</button>
         </div>
       </div>
           </div>
@@ -1125,200 +1176,320 @@ Kia ora, e hoa. | Hello, friend.</pre>
             <div class="hist-col-head">Sentences <span class="badge" id="histSentBadge">38</span></div>
             <div class="hist-sent-scroll"><div id="histSentList">
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te pai ahau.</div>
-          <div class="hs-eng">I am well.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te pai ahau.</div>
+            <div class="hs-eng">I am well.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(0)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kia ora, e hoa.</div>
-          <div class="hs-eng">Hello, friend.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kia ora, e hoa.</div>
+            <div class="hs-eng">Hello, friend.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(1)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka kite ano.</div>
-          <div class="hs-eng">See you again.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka kite ano.</div>
+            <div class="hs-eng">See you again.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(2)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Tenei taku kapu.</div>
-          <div class="hs-eng">This is my cup.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Tenei taku kapu.</div>
+            <div class="hs-eng">This is my cup.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(3)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Tena to pereti.</div>
-          <div class="hs-eng">That is your plate.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Tena to pereti.</div>
+            <div class="hs-eng">That is your plate.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(4)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Tera tana pune.</div>
-          <div class="hs-eng">That over there is his/her spoon.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Tera tana pune.</div>
+            <div class="hs-eng">That over there is his/her spoon.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(5)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te pehea koe?</div>
-          <div class="hs-eng">How are you?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te pehea koe?</div>
+            <div class="hs-eng">How are you?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(6)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te aha koe?</div>
-          <div class="hs-eng">What are you doing?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te aha koe?</div>
+            <div class="hs-eng">What are you doing?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(7)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka aha te tane?</div>
-          <div class="hs-eng">What will the man do?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka aha te tane?</div>
+            <div class="hs-eng">What will the man do?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(8)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka piki te tane i te maunga.</div>
-          <div class="hs-eng">The man will climb the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka piki te tane i te maunga.</div>
+            <div class="hs-eng">The man will climb the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(9)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka heke te tane i te maunga.</div>
-          <div class="hs-eng">The man will descend the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka heke te tane i te maunga.</div>
+            <div class="hs-eng">The man will descend the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(10)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te aha te tane?</div>
-          <div class="hs-eng">What is the man doing?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te aha te tane?</div>
+            <div class="hs-eng">What is the man doing?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(11)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te heke te tane i te maunga.</div>
-          <div class="hs-eng">The man is descending the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te heke te tane i te maunga.</div>
+            <div class="hs-eng">The man is descending the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(12)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka aha nga kuia me te tane?</div>
-          <div class="hs-eng">What will the old women and the man do?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka aha nga kuia me te tane?</div>
+            <div class="hs-eng">What will the old women and the man do?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(13)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka piki nga kuia me te tane i te maunga.</div>
-          <div class="hs-eng">The old women and the man will climb the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka piki nga kuia me te tane i te maunga.</div>
+            <div class="hs-eng">The old women and the man will climb the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(14)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te aha nga kuia me te tane?</div>
-          <div class="hs-eng">What are the old women and the man doing?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te aha nga kuia me te tane?</div>
+            <div class="hs-eng">What are the old women and the man doing?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(15)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te piki nga kuia me te tane i te maunga.</div>
-          <div class="hs-eng">The old women and the man are climbing the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te piki nga kuia me te tane i te maunga.</div>
+            <div class="hs-eng">The old women and the man are climbing the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(16)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka piki te tama i te maunga?a piki te kuia i te maunga?</div>
-          <div class="hs-eng">Will the boy climb the mountain? / Is the boy going to climb the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka piki te tama i te maunga?a piki te kuia i te maunga?</div>
+            <div class="hs-eng">Will the boy climb the mountain? / Is the boy going to climb the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(17)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka piki te kuia i te maunga?</div>
-          <div class="hs-eng">Will the elderly woman climb the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka piki te kuia i te maunga?</div>
+            <div class="hs-eng">Will the elderly woman climb the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(18)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore te tama e piki i te maunga.</div>
-          <div class="hs-eng">The boy will not climb the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore te tama e piki i te maunga.</div>
+            <div class="hs-eng">The boy will not climb the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(19)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka piki te wāhine i te maunga?</div>
-          <div class="hs-eng">Will the woman climb the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka piki te wāhine i te maunga?</div>
+            <div class="hs-eng">Will the woman climb the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(20)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore te koroheke e piki i te maunga.</div>
-          <div class="hs-eng">The old man will not climb the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore te koroheke e piki i te maunga.</div>
+            <div class="hs-eng">The old man will not climb the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(21)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Ka piki te whānau i te maunga?</div>
-          <div class="hs-eng">Will the family climb the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Ka piki te whānau i te maunga?</div>
+            <div class="hs-eng">Will the family climb the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(22)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore te kōtiro e piki i te maunga.</div>
-          <div class="hs-eng">The girl will not climb the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore te kōtiro e piki i te maunga.</div>
+            <div class="hs-eng">The girl will not climb the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(23)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te piki ngā kuia i te maunga?</div>
-          <div class="hs-eng">Are the elderly women climbing the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te piki ngā kuia i te maunga?</div>
+            <div class="hs-eng">Are the elderly women climbing the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(24)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore ngā tama i te piki i te maunga.</div>
-          <div class="hs-eng">The boys are not climbing the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore ngā tama i te piki i te maunga.</div>
+            <div class="hs-eng">The boys are not climbing the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(25)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te heke ngā kuia i te maunga?</div>
-          <div class="hs-eng">Are the elderly women descending the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te heke ngā kuia i te maunga?</div>
+            <div class="hs-eng">Are the elderly women descending the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(26)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore ngā tāne i heke i te maunga.</div>
-          <div class="hs-eng">The men are not descending the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore ngā tāne i heke i te maunga.</div>
+            <div class="hs-eng">The men are not descending the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(27)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kei te piki te tama i te maunga?</div>
-          <div class="hs-eng">Is the boy climbing the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kei te piki te tama i te maunga?</div>
+            <div class="hs-eng">Is the boy climbing the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(28)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore te kōtiro i te piki i te maunga.</div>
-          <div class="hs-eng">The girl is not climbing the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore te kōtiro i te piki i te maunga.</div>
+            <div class="hs-eng">The girl is not climbing the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(29)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kua piki te ngeru i te maunga?</div>
-          <div class="hs-eng">Has the cat climbed the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kua piki te ngeru i te maunga?</div>
+            <div class="hs-eng">Has the cat climbed the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(30)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore te koti i piki i te maunga.</div>
-          <div class="hs-eng">The goat has not climbed the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore te koti i piki i te maunga.</div>
+            <div class="hs-eng">The goat has not climbed the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(31)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">I heke te hōiho i te maunga?</div>
-          <div class="hs-eng">Did the horse descend the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">I heke te hōiho i te maunga?</div>
+            <div class="hs-eng">Did the horse descend the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(32)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore te rakiraki i heke i te maunga.</div>
-          <div class="hs-eng">The duck did not descend the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore te rakiraki i heke i te maunga.</div>
+            <div class="hs-eng">The duck did not descend the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(33)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kua piki te heihei i te maunga?</div>
-          <div class="hs-eng">Has the chicken climbed the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kua piki te heihei i te maunga?</div>
+            <div class="hs-eng">Has the chicken climbed the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(34)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore te kau i piki i te maunga.</div>
-          <div class="hs-eng">The cow has not climbed the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore te kau i piki i te maunga.</div>
+            <div class="hs-eng">The cow has not climbed the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(35)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">I heke te kurī i te maunga?</div>
-          <div class="hs-eng">Did the dog descend the mountain?</div>
+          <div class="hs-body">
+            <div class="hs-maori">I heke te kurī i te maunga?</div>
+            <div class="hs-eng">Did the dog descend the mountain?</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(36)">✕</button>
         </div>
       
         <div class="hist-sent-item">
-          <div class="hs-maori">Kāore te ngeru i heke i te maunga.</div>
-          <div class="hs-eng">The cat did not descend the mountain.</div>
+          <div class="hs-body">
+            <div class="hs-maori">Kāore te ngeru i heke i te maunga.</div>
+            <div class="hs-eng">The cat did not descend the mountain.</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(37)">✕</button>
         </div>
       </div></div>
           </div>
         </div>
 
-        <div class="hist-col-head" style="margin-top:24px">Audio Files <span class="badge" id="histAudioBadge">0</span></div>
-        <div id="histAudioList" class="grid" style="margin-top:8px"><div class="empty">No audio files yet.</div></div>
+        <div class="hist-col-head" style="margin-top:24px">Audio Files <span class="badge" id="histAudioBadge">1</span></div>
+        <div id="histAudioList" class="grid" style="margin-top:8px">
+        <div class="audio-entry">
+          <div class="audio-label" style="font-weight:700;color:var(--ink);min-width:120px">Maori-Unit7.mp3</div>
+          <span class="note">Not available on this device — re-add the file.</span>
+          <button class="btn-del" title="Delete this audio file" onclick="deleteAudio(0)">✕</button>
+        </div>
+      </div>
       </section>
     </div>
 
@@ -1672,50 +1843,85 @@ Kia ora, e hoa. | Hello, friend.</pre>
 
   /* ── HISTORY tab ── */
   function renderHistory() {
-    // Words — compact chips in scrollable column
+    // Words — compact chips with delete
     const wordList = document.getElementById("histWordList");
     document.getElementById("histWordBadge").textContent = db.words.length;
     if (!db.words.length) {
       wordList.innerHTML = `<div class="empty">No words yet.</div>`;
     } else {
-      const sorted = [...db.words].sort((a,b) => a.maori.localeCompare(b.maori));
+      const sorted = [...db.words].map((w, i) => ({ ...w, _i: i }))
+                                   .sort((a,b) => a.maori.localeCompare(b.maori));
       wordList.innerHTML = sorted.map(w => `
         <div class="hist-word-chip">
           <span class="hw-maori">${escapeHtml(w.maori)}</span>
           <span class="hw-eng">${escapeHtml(w.english)}</span>
+          <button class="btn-del" title="Delete this word" onclick="deleteWord(${w._i})">✕</button>
         </div>
       `).join("");
     }
 
-    // Sentences — flat list, no dates
+    // Sentences — flat list with delete
     const sentList = document.getElementById("histSentList");
     document.getElementById("histSentBadge").textContent = db.sentences.length;
     if (!db.sentences.length) {
       sentList.innerHTML = `<div class="empty">No sentences yet.</div>`;
     } else {
-      sentList.innerHTML = db.sentences.map(s => `
+      sentList.innerHTML = db.sentences.map((s, i) => `
         <div class="hist-sent-item">
-          <div class="hs-maori">${escapeHtml(s.maori)}</div>
-          <div class="hs-eng">${escapeHtml(s.english)}</div>
+          <div class="hs-body">
+            <div class="hs-maori">${escapeHtml(s.maori)}</div>
+            <div class="hs-eng">${escapeHtml(s.english)}</div>
+          </div>
+          <button class="btn-del" title="Delete this sentence" onclick="deleteSentence(${i})">✕</button>
         </div>
       `).join("");
     }
 
-    // Audio — playable
+    // Audio — playable with delete
     const audioList = document.getElementById("histAudioList");
     document.getElementById("histAudioBadge").textContent = db.audio.length;
     if (!db.audio.length) {
       audioList.innerHTML = `<div class="empty">No audio files yet.</div>`;
     } else {
-      audioList.innerHTML = db.audio.map(a => `
+      audioList.innerHTML = db.audio.map((a, i) => `
         <div class="audio-entry">
           <div class="audio-label" style="font-weight:700;color:var(--ink);min-width:120px">${escapeHtml(a.label)}</div>
           ${a.dataUrl
             ? `<audio controls src="${escapeHtml(a.dataUrl)}" style="flex:1;min-width:200px;height:32px"></audio>`
             : `<span class="note">Not available on this device — re-add the file.</span>`}
+          <button class="btn-del" title="Delete this audio file" onclick="deleteAudio(${i})">✕</button>
         </div>
       `).join("");
     }
+  }
+
+  function deleteWord(index) {
+    if (!confirm(`Delete "${db.words[index].maori}"?`)) return;
+    db.words.splice(index, 1);
+    saveDB();
+    renderHistory();
+    renderStats();
+    renderLearn();
+  }
+
+  function deleteSentence(index) {
+    if (!confirm(`Delete this sentence?`)) return;
+    db.sentences.splice(index, 1);
+    saveDB();
+    renderHistory();
+    renderStats();
+    renderLearn();
+  }
+
+  function deleteAudio(index) {
+    if (!confirm(`Delete "${db.audio[index].label}"? This frees up storage space.`)) return;
+    db.audio.splice(index, 1);
+    // Also remove from audio localStorage
+    const audioFull = loadAudio().filter((_, i) => i !== index);
+    try { localStorage.setItem(AUDIO_KEY, JSON.stringify(audioFull)); } catch(e) {}
+    saveDB();
+    renderHistory();
+    renderStats();
   }
 
   /* ── Stats sidebar ── */
