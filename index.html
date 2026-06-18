@@ -4,6 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Te Reo Māori – My Class Notes</title>
+  <script>
+    (function() {
+      // 如果访问的是旧的大写 URL，自动跳转到小写
+      var currentUrl = window.location.href;
+      var oldPattern = /Maori_Learn/;
+      var newPattern = 'maori_learn';
+      
+      if (oldPattern.test(currentUrl)) {
+        var fixedUrl = currentUrl.replace(oldPattern, newPattern);
+        window.location.replace(fixedUrl);
+      }
+    })();
+  </script>
+  
   <style>
     :root {
       color-scheme: light;
