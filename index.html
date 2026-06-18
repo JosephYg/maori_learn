@@ -1,7 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+<!DOCTYPE html>
+<!-- saved from url=(0054)file:///C:/Users/Admin/Downloads/maori-learn-v3_2.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Te Reo Māori – My Class Notes</title>
   <script>
@@ -348,7 +349,7 @@
     }
 
     .hist-word-scroll {
-      max-height: 480px;
+      max-height: 260px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -385,6 +386,12 @@
       flex-direction: column;
     }
 
+    .hist-sent-scroll {
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
     .hist-sent-item {
       border-left: 4px solid var(--gold);
       padding: 6px 10px;
@@ -408,7 +415,8 @@
 
     @media (max-width: 700px) {
       .hist-columns { grid-template-columns: 1fr; }
-      .hist-word-scroll { max-height: 240px; }
+      .hist-word-scroll { max-height: 200px; }
+      .hist-sent-scroll { max-height: 200px; }
     }
 
     /* history */
@@ -694,8 +702,8 @@
       .input-pair { grid-template-columns: 1fr; }
     }
   </style>
-</head>
-<body>
+<style></style></head>
+<body data-new-gr-c-s-check-loaded="14.1138.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1138.0">
 <div class="app">
   <header>
     <div>
@@ -703,17 +711,17 @@
       <p class="subhead">Your personal learning db. Add words, sentences, and audio from class — review and practise them here.</p>
     </div>
     <div class="datebox">
-      <span id="todayLabel"></span>
-      <strong id="dayNumber"></strong>
+      <span id="todayLabel">Thu, 18 Jun 2026</span>
+      <strong id="dayNumber">Day 1</strong>
     </div>
   </header>
 
   <div class="topbar">
     <div class="tabs" role="tablist" aria-label="Practice sections">
-      <button class="tab" id="tabLearn" aria-selected="true">Learn</button>
+      <button class="tab" id="tabLearn" aria-selected="false">Learn</button>
       <button class="tab" id="tabPractice" aria-selected="false">Practice</button>
       <button class="tab" id="tabSelfPractice" aria-selected="false">Self-practice</button>
-      <button class="tab" id="tabHistory" aria-selected="false">History</button>
+      <button class="tab" id="tabHistory" aria-selected="true">History</button>
     </div>
     <button class="action ghost" id="exportData">Export db</button>
     <button class="action ghost" id="importData">Import JSON</button>
@@ -725,22 +733,137 @@
   <main id="mainGrid">
     <div>
       <!-- LEARN TAB -->
-      <section id="learnPanel">
-        <h2>Today's 5 Kupu <span class="badge" id="learnWordBadge">0</span></h2>
-        <div id="learnWordGrid" class="grid word-grid"></div>
-        <h2 style="margin-top:24px">Today's 3 Sentences <span class="badge" id="learnSentBadge">0</span></h2>
-        <div id="learnSentList" class="sentence-list"></div>
+      <section id="learnPanel" class="hidden">
+        <h2>Today's 5 Kupu <span class="badge" id="learnWordBadge">5/28</span></h2>
+        <div id="learnWordGrid" class="grid word-grid">
+        <article class="word">
+          <div class="maori">pune</div>
+          <div class="meaning">spoon</div>
+          
+        </article>
+      
+        <article class="word">
+          <div class="maori">kia ora</div>
+          <div class="meaning">hello, thank you</div>
+          
+        </article>
+      
+        <article class="word">
+          <div class="maori">taku</div>
+          <div class="meaning">my,mine</div>
+          
+        </article>
+      
+        <article class="word">
+          <div class="maori">tō</div>
+          <div class="meaning">your, yours</div>
+          
+        </article>
+      
+        <article class="word">
+          <div class="maori">tērā</div>
+          <div class="meaning">that over there</div>
+          
+        </article>
+      </div>
+        <h2 style="margin-top:24px">Today's 5 Sentences <span class="badge" id="learnSentBadge">5/38</span></h2>
+        <div id="learnSentList" class="sentence-list">
+        <article class="sentence">
+          <div class="maori">Kei te heke te tane i te maunga.</div>
+          <div class="meaning">The man is descending the mountain.</div>
+        </article>
+      
+        <article class="sentence">
+          <div class="maori">Tenei taku kapu.</div>
+          <div class="meaning">This is my cup.</div>
+        </article>
+      
+        <article class="sentence">
+          <div class="maori">Kei te pehea koe?</div>
+          <div class="meaning">How are you?</div>
+        </article>
+      
+        <article class="sentence">
+          <div class="maori">Ka piki te kuia i te maunga?</div>
+          <div class="meaning">Will the elderly woman climb the mountain?</div>
+        </article>
+      
+        <article class="sentence">
+          <div class="maori">Kei te pai ahau.</div>
+          <div class="meaning">I am well.</div>
+        </article>
+      </div>
       </section>
 
       <!-- PRACTICE TAB -->
       <section id="practicePanel" class="hidden">
         <h2>Sentence Practice</h2>
         <p class="note">Translate each English prompt into Māori. Drawn from all sentences in your db.</p>
-        <div class="grid" id="practiceList"></div>
+        <div class="grid" id="practiceList">
+        <article class="practice-item">
+          <div class="prompt">1. The man is descending the mountain.</div>
+          <textarea class="practice-answer" rows="1" id="ans0" aria-label="Answer 1"></textarea>
+          <div class="feedback" id="fb0">Added: Thu, 18 Jun 2026</div>
+        </article>
+      
+        <article class="practice-item">
+          <div class="prompt">2. I am well.</div>
+          <textarea class="practice-answer" rows="1" id="ans1" aria-label="Answer 2"></textarea>
+          <div class="feedback" id="fb1">Added: Thu, 18 Jun 2026</div>
+        </article>
+      
+        <article class="practice-item">
+          <div class="prompt">3. This is my cup.</div>
+          <textarea class="practice-answer" rows="1" id="ans2" aria-label="Answer 3"></textarea>
+          <div class="feedback" id="fb2">Added: Thu, 18 Jun 2026</div>
+        </article>
+      
+        <article class="practice-item">
+          <div class="prompt">4. That is your plate.</div>
+          <textarea class="practice-answer" rows="1" id="ans3" aria-label="Answer 4"></textarea>
+          <div class="feedback" id="fb3">Added: Thu, 18 Jun 2026</div>
+        </article>
+      
+        <article class="practice-item">
+          <div class="prompt">5. What will the man do?</div>
+          <textarea class="practice-answer" rows="1" id="ans4" aria-label="Answer 5"></textarea>
+          <div class="feedback" id="fb4">Added: Thu, 18 Jun 2026</div>
+        </article>
+      </div>
 
         <h2 style="margin-top:24px">Word Practice</h2>
         <p class="note">Type the Māori word for each English meaning.</p>
-        <div class="grid" id="wordPracticeList"></div>
+        <div class="grid" id="wordPracticeList">
+        <article class="practice-item">
+          <div class="prompt">W1. What is the Māori for: <em>cat</em></div>
+          <input type="text" id="wans0" aria-label="Word answer 1">
+          <div class="feedback" id="wfb0">Added: Thu, 18 Jun 2026</div>
+        </article>
+      
+        <article class="practice-item">
+          <div class="prompt">W2. What is the Māori for: <em>your plate</em></div>
+          <input type="text" id="wans1" aria-label="Word answer 2">
+          <div class="feedback" id="wfb1">Added: Thu, 18 Jun 2026</div>
+        </article>
+      
+        <article class="practice-item">
+          <div class="prompt">W3. What is the Māori for: <em>food</em></div>
+          <input type="text" id="wans2" aria-label="Word answer 3">
+          <div class="feedback" id="wfb2">Added: Thu, 18 Jun 2026</div>
+        </article>
+      
+        <article class="practice-item">
+          <div class="prompt">W4. What is the Māori for: <em>your, yours</em></div>
+          <input type="text" id="wans3" aria-label="Word answer 4">
+          <div class="feedback" id="wfb3">Added: Thu, 18 Jun 2026</div>
+        </article>
+      
+        <article class="practice-item">
+          <div class="prompt">W5. What is the Māori for: <em>bucher knife</em></div>
+          <input type="text" id="wans4" aria-label="Word answer 5">
+          <div class="feedback" id="wfb4">Added: Thu, 18 Jun 2026</div>
+        </article>
+      </div>
 
         <div class="small-actions">
           <button class="action" id="checkAnswers">Check all answers</button>
@@ -831,7 +954,7 @@ Kia ora, e hoa. | Hello, friend.</pre>
           <div class="txt-input-area">
             <label class="input-group" style="margin-bottom:8px">
               <span style="font-weight:700;font-size:14px;color:var(--green-dark)">Paste text here</span>
-              <textarea id="txtImportArea" rows="10" style="margin-top:6px;font-family:monospace;font-size:13px"></textarea>
+              <textarea id="txtImportArea" rows="10" style="margin-top:6px;font-family:monospace;font-size:13px" spellcheck="false"></textarea>
             </label>
             <div class="small-actions">
               <button class="action" id="btnImportText">Import pasted text</button>
@@ -844,28 +967,358 @@ Kia ora, e hoa. | Hello, friend.</pre>
 
         <hr class="rows-sep">
         <div class="section-label">DB summary</div>
-        <div id="dbSummary" class="note"></div>
+        <div id="dbSummary" class="note"><strong>28</strong> words · <strong>38</strong> sentences · <strong>0</strong> audio files in mydb.</div>
       </section>
 
       <!-- HISTORY TAB -->
-      <section id="historyPanel" class="hidden">
+      <section id="historyPanel" class="">
         <h2>Learning History</h2>
 
         <div class="hist-columns">
           <!-- Left: word list -->
           <div class="hist-col-words">
-            <div class="hist-col-head">Words <span class="badge" id="histWordBadge">0</span></div>
-            <div id="histWordList" class="hist-word-scroll"></div>
+            <div class="hist-col-head">Words <span class="badge" id="histWordBadge">28</span></div>
+            <div id="histWordList" class="hist-word-scroll">
+        <div class="hist-word-chip">
+          <span class="hw-maori">heihei</span>
+          <span class="hw-eng">hen</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">heihei</span>
+          <span class="hw-eng">hen/chicken</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">Hoiho</span>
+          <span class="hw-eng">horse</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">kai</span>
+          <span class="hw-eng">food</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">kapu</span>
+          <span class="hw-eng">cup,mug</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">kau</span>
+          <span class="hw-eng">cow</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">kia ora</span>
+          <span class="hw-eng">hello, thank you</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">Kuri</span>
+          <span class="hw-eng">dog</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">ngeru</span>
+          <span class="hw-eng">cat</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">oka</span>
+          <span class="hw-eng">bucher knife</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">oko</span>
+          <span class="hw-eng">container,bowl</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">pereti</span>
+          <span class="hw-eng">plate</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">pune</span>
+          <span class="hw-eng">spoon</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">rakiraki</span>
+          <span class="hw-eng">duck</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">taku</span>
+          <span class="hw-eng">my,mine</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">taku kapu</span>
+          <span class="hw-eng">my cup</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tāna</span>
+          <span class="hw-eng">his/her</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tana pune</span>
+          <span class="hw-eng">his/her spoon</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tēnā</span>
+          <span class="hw-eng">that (near the listener)</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tena pereti</span>
+          <span class="hw-eng">that plate(near you)</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tēnei</span>
+          <span class="hw-eng">this (near the speaker)</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tenei kapu</span>
+          <span class="hw-eng">this cup</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tērā</span>
+          <span class="hw-eng">that over there</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tera oko</span>
+          <span class="hw-eng">that basket over there</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tirou</span>
+          <span class="hw-eng">fork</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">tō</span>
+          <span class="hw-eng">your, yours</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">to pereti</span>
+          <span class="hw-eng">your plate</span>
+        </div>
+      
+        <div class="hist-word-chip">
+          <span class="hw-maori">whanau</span>
+          <span class="hw-eng">family</span>
+        </div>
+      </div>
           </div>
           <!-- Right: sentence list -->
           <div class="hist-col-sents">
-            <div class="hist-col-head">Sentences <span class="badge" id="histSentBadge">0</span></div>
-            <div id="histSentList"></div>
+            <div class="hist-col-head">Sentences <span class="badge" id="histSentBadge">38</span></div>
+            <div class="hist-sent-scroll"><div id="histSentList">
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te pai ahau.</div>
+          <div class="hs-eng">I am well.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kia ora, e hoa.</div>
+          <div class="hs-eng">Hello, friend.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka kite ano.</div>
+          <div class="hs-eng">See you again.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Tenei taku kapu.</div>
+          <div class="hs-eng">This is my cup.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Tena to pereti.</div>
+          <div class="hs-eng">That is your plate.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Tera tana pune.</div>
+          <div class="hs-eng">That over there is his/her spoon.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te pehea koe?</div>
+          <div class="hs-eng">How are you?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te aha koe?</div>
+          <div class="hs-eng">What are you doing?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka aha te tane?</div>
+          <div class="hs-eng">What will the man do?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka piki te tane i te maunga.</div>
+          <div class="hs-eng">The man will climb the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka heke te tane i te maunga.</div>
+          <div class="hs-eng">The man will descend the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te aha te tane?</div>
+          <div class="hs-eng">What is the man doing?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te heke te tane i te maunga.</div>
+          <div class="hs-eng">The man is descending the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka aha nga kuia me te tane?</div>
+          <div class="hs-eng">What will the old women and the man do?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka piki nga kuia me te tane i te maunga.</div>
+          <div class="hs-eng">The old women and the man will climb the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te aha nga kuia me te tane?</div>
+          <div class="hs-eng">What are the old women and the man doing?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te piki nga kuia me te tane i te maunga.</div>
+          <div class="hs-eng">The old women and the man are climbing the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka piki te tama i te maunga?a piki te kuia i te maunga?</div>
+          <div class="hs-eng">Will the boy climb the mountain? / Is the boy going to climb the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka piki te kuia i te maunga?</div>
+          <div class="hs-eng">Will the elderly woman climb the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore te tama e piki i te maunga.</div>
+          <div class="hs-eng">The boy will not climb the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka piki te wāhine i te maunga?</div>
+          <div class="hs-eng">Will the woman climb the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore te koroheke e piki i te maunga.</div>
+          <div class="hs-eng">The old man will not climb the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Ka piki te whānau i te maunga?</div>
+          <div class="hs-eng">Will the family climb the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore te kōtiro e piki i te maunga.</div>
+          <div class="hs-eng">The girl will not climb the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te piki ngā kuia i te maunga?</div>
+          <div class="hs-eng">Are the elderly women climbing the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore ngā tama i te piki i te maunga.</div>
+          <div class="hs-eng">The boys are not climbing the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te heke ngā kuia i te maunga?</div>
+          <div class="hs-eng">Are the elderly women descending the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore ngā tāne i heke i te maunga.</div>
+          <div class="hs-eng">The men are not descending the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kei te piki te tama i te maunga?</div>
+          <div class="hs-eng">Is the boy climbing the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore te kōtiro i te piki i te maunga.</div>
+          <div class="hs-eng">The girl is not climbing the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kua piki te ngeru i te maunga?</div>
+          <div class="hs-eng">Has the cat climbed the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore te koti i piki i te maunga.</div>
+          <div class="hs-eng">The goat has not climbed the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">I heke te hōiho i te maunga?</div>
+          <div class="hs-eng">Did the horse descend the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore te rakiraki i heke i te maunga.</div>
+          <div class="hs-eng">The duck did not descend the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kua piki te heihei i te maunga?</div>
+          <div class="hs-eng">Has the chicken climbed the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore te kau i piki i te maunga.</div>
+          <div class="hs-eng">The cow has not climbed the mountain.</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">I heke te kurī i te maunga?</div>
+          <div class="hs-eng">Did the dog descend the mountain?</div>
+        </div>
+      
+        <div class="hist-sent-item">
+          <div class="hs-maori">Kāore te ngeru i heke i te maunga.</div>
+          <div class="hs-eng">The cat did not descend the mountain.</div>
+        </div>
+      </div></div>
           </div>
         </div>
 
         <div class="hist-col-head" style="margin-top:24px">Audio Files <span class="badge" id="histAudioBadge">0</span></div>
-        <div id="histAudioList" class="grid" style="margin-top:8px"></div>
+        <div id="histAudioList" class="grid" style="margin-top:8px"><div class="empty">No audio files yet.</div></div>
       </section>
     </div>
 
@@ -876,15 +1329,12 @@ Kia ora, e hoa. | Hello, friend.</pre>
         <button class="mini-button" id="toggleProgress" aria-expanded="true" title="Minimize panel">−</button>
       </div>
       <div class="progress-body">
-        <div class="progress" aria-label="Database fill"><div id="progressBar"></div></div>
-        <div class="stat"><span>Words in db</span><strong id="statWords">0</strong></div>
-        <div class="stat"><span>Sentences in db</span><strong id="statSents">0</strong></div>
-        <div class="stat"><span>Audio files</span><strong id="statAudio">0</strong></div>
-        <div class="stat"><span>Days active</span><strong id="statDays">0</strong></div>
-        <div class="stat"><span>Last quiz score</span><strong id="lastScore">-</strong></div>
-        <div class="small-actions">
-          <button class="action ghost danger" id="resetProgress">Reset all</button>
-        </div>
+        <div class="progress" aria-label="Database fill"><div id="progressBar" style="width: 66%;"></div></div>
+        <div class="stat"><span>Words in db</span><strong id="statWords">28</strong></div>
+        <div class="stat"><span>Sentences in db</span><strong id="statSents">38</strong></div>
+        <div class="stat"><span>Audio files</span><strong id="statAudio">1</strong></div>
+        <div class="stat"><span>Days active</span><strong id="statDays">1</strong></div>
+        <div class="stat"><span>Last quiz score</span><strong id="lastScore">6/5</strong></div>
       </div>
       <p class="note" style="margin-top:14px">Everything comes from your class inputs. Add words and sentences in Self-practice to build your db.</p>
     </aside>
@@ -1036,9 +1486,9 @@ Kia ora, e hoa. | Hello, friend.</pre>
       `).join("");
     }
 
-    // 3 random sentences
+    // 5 random sentences
     const sents = db.sentences.length
-      ? seededShuffle(db.sentences, seed + 3).slice(0, 3)
+      ? seededShuffle(db.sentences, seed + 3).slice(0, 5)
       : [];
 
     const sentList = document.getElementById("learnSentList");
@@ -1526,14 +1976,6 @@ Kia ora, e hoa. | Hello, friend.</pre>
     applyProgressPanelState();
   });
 
-  document.getElementById("resetProgress").addEventListener("click", () => {
-    if (confirm("Delete all words, sentences, audio, and scores from mydb? This cannot be undone.")) {
-      localStorage.removeItem(DB_KEY);
-      localStorage.removeItem(AUDIO_KEY);
-      location.reload();
-    }
-  });
-
   // Enter key shortcuts in input fields
   ["addEnglishWord","addNoteWord"].forEach(id => {
     document.getElementById(id).addEventListener("keydown", e => {
@@ -1550,5 +1992,7 @@ Kia ora, e hoa. | Hello, friend.</pre>
   renderStats();
   applyProgressPanelState();
 </script>
-</body>
-</html>
+
+
+
+</body></html>
